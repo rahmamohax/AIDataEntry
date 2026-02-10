@@ -1,4 +1,7 @@
 
+using AIDataEntry.Infrastructure.Data.DbContexts;
+using Microsoft.EntityFrameworkCore;
+
 namespace AIDataEntry.Api
 {
     public class Program
@@ -7,7 +10,13 @@ namespace AIDataEntry.Api
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            #region Services
+            builder.Services.AddDbContext<AppDbContext>(opt =>
+                {
+                    opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+                });
+
+            #endregion
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
