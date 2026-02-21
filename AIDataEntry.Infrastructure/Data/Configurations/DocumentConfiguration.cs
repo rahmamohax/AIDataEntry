@@ -1,4 +1,4 @@
-﻿using AIDataEntry.Domain.Entities;
+using AIDataEntry.Domain.Entities;
 using AIDataEntry.Infrastructure.Data.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -29,13 +29,14 @@ namespace AIDataEntry.Infrastructure.Data.Configurations
               .IsRequired()
               .HasConversion<string>();
 
-            builder.HasMany<ExtractedField>("_extractedFields")
+            builder.HasMany(d => d.ExtractedFields)
                 .WithOne()
-                .HasForeignKey(d => d.DocumentId)
+                .HasForeignKey(f => f.DocumentId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.Navigation("_extractedFields")
-                  .UsePropertyAccessMode(PropertyAccessMode.Field);
+            builder.Navigation(d => d.ExtractedFields)
+                .HasField("_extractedFields")
+                .UsePropertyAccessMode(PropertyAccessMode.Field);
         }
     }
 }

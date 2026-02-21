@@ -15,10 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\AIDataEntry.Application\AIDataEntry.Application.csproj" />
     <ProjectReference Include="..\AIDataEntry.Infrastructure\AIDataEntry.Infrastructure.csproj" />
   </ItemGroup>

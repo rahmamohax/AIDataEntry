@@ -1,5 +1,7 @@
 
+using AIDataEntry.Application.Interfaces;
 using AIDataEntry.Infrastructure.Data.DbContexts;
+using AIDataEntry.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace AIDataEntry.Api
@@ -16,6 +18,7 @@ namespace AIDataEntry.Api
                     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
                 });
 
+            builder.Services.AddScoped<IFileStorageService, LocalFileStorageService>();
             #endregion
 
             builder.Services.AddControllers();

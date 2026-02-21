@@ -31,6 +31,9 @@ namespace AIDataEntry.Domain.Entities
 
         public void MarkExtracted()
         {
+            if (DocumentStatus != DocumentStatus.Uploaded)
+                throw new InvalidOperationException($"Cannot move to PendingReview from {DocumentStatus}");
+
             DocumentStatus = DocumentStatus.PendingReview;
         }
         public void Confirm()
